@@ -98,9 +98,9 @@ function Home() {
                         <div className="col-xl-6 col-lg-7 col-md-8">
                             <div className="bd-section__title-wrapper p-relative mb-85">
                                 <div className="bd-section__img w-img">
-                                    <img src="assets/img/step/title-img.png" alt="title-img" />
+                                    <img src="assets/img/banner2/logo.png" alt="title-img" />
                                 </div>
-                                <span className="bd-step__title">Trendy & Premium Quality</span>
+                                {/* <span className="bd-step__title">Trendy & Premium Quality</span> */}
                             </div>
                         </div>
                     </div>
@@ -246,10 +246,8 @@ function Home() {
                                 <div className="bd-about__content">
                                     <div className="bd-about__features">
                                         <div className="bd-adbout__icon">
-                                            <img
-                                                src="assets/img/about/about-icon.png"
-                                                alt="about-icon"
-                                            />
+                                           <img src="assets/img/blog2/1.png" alt="icon" width="140" height="160" />
+
                                         </div>
                                         <div className="bd-about__text">
                                             <h4>Quality and Style Guaranteed</h4>
@@ -288,10 +286,10 @@ function Home() {
                                     </div>
                                 </div>
                                 <div className="bd-about__shape-1">
-                                    <img
+                                    {/* <img
                                         src="assets/img/about/about-shape-1.png"
                                         alt="about-shape"
-                                    />
+                                    /> */}
                                 </div>
                                 <div className="bd-about__shape-2" />
                                 <div className="bd-about__shape-3" />
@@ -359,7 +357,7 @@ function Home() {
                                         <p>Our clothing is made with high-quality fabrics for ultimate comfort and durability.</p>
                                     </div>
                                     <div className="bd-choose__icon choose-icon__left">
-                                        <img src="assets/img/why-choose/quality.png" alt="Premium Quality" />
+                                        {/* <img src="assets/img/why-choose/quality.png" alt="Premium Quality" /> */}
                                     </div>
                                 </div>
                                 <div className="bd-choose__item">
@@ -368,7 +366,7 @@ function Home() {
                                         <p>We bring you the latest fashion trends with stylish, modern, and timeless designs.</p>
                                     </div>
                                     <div className="bd-choose__icon choose-icon__left">
-                                        <img src="assets/img/why-choose/trendy.png" alt="Trendy Designs" />
+                                        {/* <img src="assets/img/why-choose/trendy.png" alt="Trendy Designs" /> */}
                                     </div>
                                 </div>
                                 <div className="bd-choose__item">
@@ -377,21 +375,21 @@ function Home() {
                                         <p>We offer a wide range of sizes, ensuring a perfect fit for everyone.</p>
                                     </div>
                                     <div className="bd-choose__icon choose-icon__left">
-                                        <img src="assets/img/why-choose/sizing.png" alt="Inclusive Sizing" />
+                                        {/* <img src="assets/img/why-choose/sizing.png" alt="Inclusive Sizing" /> */}
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div className="col-xl-4 col-lg-4 col-md-6">
                             <div className="bd-choose__thumb text-center w-img mb-30">
-                                <img style={{ height: "400px", width: "auto", maxWidth: "100%" }} src="img/product/clothing-main.jpeg" alt="Choose Big" />
+                                <img style={{ height: "450px", width: "auto", maxWidth: "100%" }} src="assets/img/banner/b2.png" alt="Choose Big" />
                             </div>
                         </div>
                         <div className="col-xl-4 col-lg-4 col-md-6">
                             <div className="bd-choose__wrapper choose-wrapper__right mb-60">
                                 <div className="bd-choose__item">
                                     <div className="bd-choose__icon choose__icon-right">
-                                        <img src="assets/img/why-choose/eco.png" alt="Eco-Friendly" />
+                                        {/* <img src="assets/img/why-choose/eco.png" alt="Eco-Friendly" /> */}
                                     </div>
                                     <div className="bd-choose__content text-start">
                                         <h4>Sustainable Fashion</h4>
@@ -400,7 +398,7 @@ function Home() {
                                 </div>
                                 <div className="bd-choose__item">
                                     <div className="bd-choose__icon choose__icon-right">
-                                        <img src="assets/img/why-choose/fast-shipping.png" alt="Fast Shipping" />
+                                        {/* <img src="assets/img/why-choose/fast-shipping.png" alt="Fast Shipping" /> */}
                                     </div>
                                     <div className="bd-choose__content text-start">
                                         <h4>Fast & Free Shipping</h4>
@@ -409,7 +407,7 @@ function Home() {
                                 </div>
                                 <div className="bd-choose__item">
                                     <div className="bd-choose__icon choose__icon-right">
-                                        <img src="assets/img/why-choose/returns.png" alt="Easy Returns" />
+                                        {/* <img src="assets/img/why-choose/returns.png" alt="Easy Returns" /> */}
                                     </div>
                                     <div className="bd-choose__content text-start">
                                         <h4>Hassle-Free Returns</h4>

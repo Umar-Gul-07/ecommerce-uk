@@ -11,7 +11,7 @@ const About = ({ title }) => {
             <Catagories title={title} />
             <section
                 className="bd-page__banner-area include-bg page-overlay"
-                data-background="assets/img/banner/page-banner-1.jpg"
+                data-background="assets/img/banner/b2.png"
                 style={{
                     backgroundImage: 'url("assets/img/banner/page-banner-1.jpg")',
                 }}
@@ -35,14 +35,16 @@ const About = ({ title }) => {
                             <div className="bd-about__wrapper mb-60">
                                 <div className="bd-about__image-1 m-img mb-60">
                                     <img
-                                        src="assets/img/about/about-img-3.jpg"
+                                        src="assets/img/banner/b2.png"
                                         alt="about-image"
                                     />
                                 </div>
                                 <div className="bd-about__image-2 m-img">
                                     <img
-                                        src="assets/img/about/alo2.webp"
+                                        src="assets/img/banner2/33.png"
                                         alt="about-image"
+                                        width={"400"}
+                                        height={"500"}
                                     />
                                 </div>
                             </div>

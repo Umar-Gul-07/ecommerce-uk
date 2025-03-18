@@ -93,7 +93,7 @@ function Header() {
                                             className="offcanvas__top mb-40 d-flex justify-content-between align-items-center">
                                             <div className="offcanvas__logo logo">
                                                 <Link to="/">
-                                                    <img width="100px" src="assets/img/logo-5.png" alt="logo"/>
+                                                    <img width="100px" src="assets/img/banner2/logo-white.png" alt="logo"/>
                                                 </Link>
                                             </div>
                                             <div className="offcanvas__close">
@@ -249,7 +249,7 @@ function Header() {
                                             <div className="bd-header__left-2">
                                                 <div className="bd-header__logo-2 p-relative">
                                                     <Link to="/">
-                                                        <img width="100px" src="assets/img/logo-5.png" alt="logo"/>
+                                                        <img width="100px" src="assets/img/banner2/logo.png" alt="logo"/>
                                                     </Link>
                                                 </div>
                                                 <div className="main-menu d-none d-none d-lg-block">

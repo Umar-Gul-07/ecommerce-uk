@@ -16,7 +16,7 @@ function Footer() {
                                     <div className="bd-footer__logo">
                                         <Link to="/">
                                             <img width="120px"
-                                                src="assets/img/logo-5.png"
+                                                src="assets/img/banner2/logo.png"
                                                 alt="footer-logo"
                                             />
                                         </Link>
