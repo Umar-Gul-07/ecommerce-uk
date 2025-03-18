@@ -1,8 +1,8 @@
-import {Helmet} from "react-helmet";
-import {Link} from "react-router-dom";
-import React, {useEffect, useState} from "react";
+import { Helmet } from "react-helmet";
+import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
 import api from "../Utils/Axios";
-import {toast} from "react-toastify";
+import { toast } from "react-toastify";
 import Product from "./include/Product";
 
 function Home() {
@@ -47,13 +47,10 @@ function Home() {
 
             <section className="bd-banner__area dark-bg banner-height-2 d-flex align-items-center p-relative fix">
                 <div className="bd-banner__shape-1">
-                    <img src="img/product/alo7.png" alt="banner-shape"/>
+                    <img src="img/product/alo7.png" alt="banner-shape" />
                 </div>
                 <div className="bd-banner__discount-shape">
-                    <img
-                        src="assets/img/banner/discount-shape.png"
-                        alt="discount-shape"
-                    />
+                    <img src="assets/img/banner/discount-shape.png" alt="discount-shape" />
                     <div className="discount-text">
                         <span>50%</span>off
                     </div>
@@ -64,24 +61,18 @@ function Home() {
                             <div className="col-xl-7 col-lg-6 col-md-6 col-12">
                                 <div className="bd-banner__content__wrapper p-relative">
                                     <div className="bd-banner__text-shape mb-10">
-                                        <img
-                                            src="assets/img/banner/banner-shape-2.png"
-                                            alt="banner-shape"
-                                        />
+                                        <img src="assets/img/banner/banner-shape-2.png" alt="banner-shape" />
                                     </div>
                                     <div className="bd-banner__btn-shape">
-                                        <img
-                                            src="assets/img/banner/curved-arrow.png"
-                                            alt="curved-arrow"
-                                        />
+                                        <img src="assets/img/banner/curved-arrow.png" alt="curved-arrow" />
                                     </div>
                                     <div className="bd-banner__content-2">
                                         <h2>
-                                            Aloe Vera <br/> Honey
+                                            Trendy & Stylish <br /> Apparel
                                         </h2>
                                         <p>
-                                            <b> Discover organic aloe vera and </b> <br/>{" "}
-                                            <b>pure honey from our farm</b>{" "}
+                                            <b> Explore our latest fashion collection </b> <br />
+                                            <b>with premium quality and comfort</b>
                                         </p>
                                         <div className="bd-banner__btn">
                                             <Link className="bd-bn__btn-1" to="/shop">
@@ -93,7 +84,7 @@ function Home() {
                             </div>
                             <div className="col-xl-5 col-lg-6 col-md-6">
                                 <div className="bd-banner__thumb">
-                                    <img src="img/product/alo1.webp" alt="banner-3.png"/>
+                                    <img src="img/product/alo1.webp" alt="banner-3.png" />
                                 </div>
                             </div>
                         </div>
@@ -107,9 +98,9 @@ function Home() {
                         <div className="col-xl-6 col-lg-7 col-md-8">
                             <div className="bd-section__title-wrapper p-relative mb-85">
                                 <div className="bd-section__img w-img">
-                                    <img src="assets/img/step/title-img.png" alt="title-img"/>
+                                    <img src="assets/img/step/title-img.png" alt="title-img" />
                                 </div>
-                                <span className="bd-step__title">and pure products</span>
+                                <span className="bd-step__title">Trendy & Premium Quality</span>
                             </div>
                         </div>
                     </div>
@@ -117,26 +108,17 @@ function Home() {
                         <div className="col-xl-3 col-lg-3 col-md-6 col-sm-6 d-flex align-items-center">
                             <div className="bd-step__item text-center p-relative mb-60">
                                 <div className="bd-step__arrow mb-3">
-                                    <img
-                                        src="assets/img/step/step-arrow-1.png"
-                                        alt="step-arrow"
-                                    />
+                                    <img src="assets/img/step/step-arrow-1.png" alt="step-arrow" />
                                 </div>
                                 <div className="bd-step__icon mb-3">
-                                    <img
-                                        style={{width: "40%", height: "auto"}}
-                                        src="img/product/alol1.avif"
-                                        alt="step-icon"
-                                    />
+                                    <img style={{ width: "40%", height: "auto" }} src="img/product/alol1.avif" alt="step-icon" />
                                 </div>
                                 <div className="bd-step__content">
                                     <h3>
-                                        <Link to="about">What is Aloe Vera? </Link>
+                                        <Link to="about">Latest Fashion Trends</Link>
                                     </h3>
                                     <p>
-                                        Aloe vera is a succulent plant known for its soothing,
-                                        healing gel, commonly used for skin care and medicinal
-                                        purposes
+                                        Stay ahead with our handpicked fashion essentials for every occasion.
                                     </p>
                                 </div>
                             </div>
@@ -145,25 +127,17 @@ function Home() {
                         <div className="col-xl-3 col-lg-3 col-md-6 col-sm-6 d-flex align-items-center">
                             <div className="bd-step__item text-center p-relative mb-60">
                                 <div className="bd-step__arrow mb-3">
-                                    <img
-                                        src="assets/img/step/step-arrow-2.png"
-                                        alt="step-arrow"
-                                    />
+                                    <img src="assets/img/step/step-arrow-2.png" alt="step-arrow" />
                                 </div>
                                 <div className="bd-step__icon mb-3">
-                                    <img
-                                        style={{width: "40%", height: "auto"}}
-                                        src="img/product/alol2.avif"
-                                        alt="step-icon"
-                                    />
+                                    <img style={{ width: "40%", height: "auto" }} src="img/product/alol2.avif" alt="step-icon" />
                                 </div>
                                 <div className="bd-step__content">
                                     <h3>
-                                        <Link to="about">Skin Care Benefits </Link>
+                                        <Link to="about">High-Quality Materials</Link>
                                     </h3>
                                     <p>
-                                        Aloe vera moisturizes, soothes, heals, and reduces acne and
-                                        aging signs on the skin
+                                        Experience comfort and durability with our premium fabric selections.
                                     </p>
                                 </div>
                             </div>
@@ -172,25 +146,17 @@ function Home() {
                         <div className="col-xl-3 col-lg-3 col-md-6 col-sm-6 d-flex align-items-center">
                             <div className="bd-step__item text-center p-relative mb-60">
                                 <div className="bd-step__arrow mb-3">
-                                    <img
-                                        src="assets/img/step/step-arrow-1.png"
-                                        alt="step-arrow"
-                                    />
+                                    <img src="assets/img/step/step-arrow-1.png" alt="step-arrow" />
                                 </div>
                                 <div className="bd-step__icon mb-3">
-                                    <img
-                                        style={{width: "40%", height: "auto"}}
-                                        src="img/product/alol4.jpg"
-                                        alt="step-icon"
-                                    />
+                                    <img style={{ width: "40%", height: "auto" }} src="img/product/alol4.jpg" alt="step-icon" />
                                 </div>
                                 <div className="bd-step__content">
                                     <h3>
-                                        <Link to="about">Honey</Link>
+                                        <Link to="about">Accessories & Footwear</Link>
                                     </h3>
                                     <p>
-                                        Honey is a natural sweetener with antimicrobial properties
-                                        that moisturizes, heals wounds, and soothes skin irritations
+                                        Complete your outfit with our stylish accessories and comfortable footwear.
                                     </p>
                                 </div>
                             </div>
@@ -199,20 +165,14 @@ function Home() {
                         <div className="col-xl-3 col-lg-3 col-md-6 col-sm-6 d-flex align-items-center">
                             <div className="bd-step__item text-center p-relative mb-60">
                                 <div className="bd-step__icon mb-3">
-                                    <img
-                                        style={{width: "40%", height: "auto"}}
-                                        src="img/product/alol3.jpg"
-                                        alt="step-icon"
-                                    />
+                                    <img style={{ width: "40%", height: "auto" }} src="img/product/alol3.jpg" alt="step-icon" />
                                 </div>
                                 <div className="bd-step__content">
                                     <h3>
-                                        <Link to="about">Aloe Vera With Honey</Link>
+                                        <Link to="about">Personalized Recommendations</Link>
                                     </h3>
                                     <p>
-                                        Aloe vera with honey combines soothing, moisturizing, and
-                                        healing properties, enhancing skin hydration and promoting
-                                        faster wound recovery
+                                        Get tailored fashion suggestions based on your style and preferences.
                                     </p>
                                 </div>
                             </div>
@@ -221,12 +181,13 @@ function Home() {
                 </div>
             </section>
 
+
             <section className="bd-product__area pt-125 pb-95">
                 <div className="container">
                     <div className="row align-items-center">
                         <div className="col-xl-5 col-lg-5">
                             <div className="bd-section__title-wrapper mb-60">
-                                <span className="bd-sub__title">Organic Products</span>
+                                <span className="bd-sub__title">Latest Fashion Products</span>
                                 <h2 className="bd-section__title mb-30">Top Products</h2>
                             </div>
                         </div>
@@ -245,10 +206,10 @@ function Home() {
                                             {topProducts.length > 0 ?
                                                 topProducts.map((object) => (
                                                     <div className="col-4">
-                                                        <Product product={object}/>
+                                                        <Product product={object} />
                                                     </div>
                                                 )) : <div className="text-center">
-                                                    <span style={{fontSize: "20px"}} className='badge text-danger'>No Products Found</span>
+                                                    <span style={{ fontSize: "20px" }} className='badge text-danger'>No Products Found</span>
                                                 </div>
                                             }
                                         </div>
@@ -259,6 +220,7 @@ function Home() {
                     </div>
                 </div>
             </section>
+
 
             <section className="bd-about__area grey-bg p-relative z-index-1 pt-130 pb-70">
                 <div className="container">
@@ -275,14 +237,10 @@ function Home() {
                                 <div className="bd-section__title-wrapper mb-35">
                                     <span className="bd-sub__title">About Us</span>
                                     <h2 className="bd-section__title mb-35">
-                                        We believe in pure and organic quality
+                                        Elevating Your Fashion Experience
                                     </h2>
                                     <p>
-                                        We had reached a great height in skincare, for the aloe vera
-                                        gel was a smooth, calming balm, and the honey had ceased to
-                                        be just a sweetener. By the same soothing effect that
-                                        combines aloe’s moisture with honey’s healing, our skin felt
-                                        rejuvenated and refreshed.
+                                        At A.I.R. Shops, we are dedicated to providing a seamless online shopping experience for clothing, shoes, and accessories. Our innovative platform integrates a Personalized Recommendation System to help you find styles that suit your taste.
                                     </p>
                                 </div>
                                 <div className="bd-about__content">
@@ -294,12 +252,9 @@ function Home() {
                                             />
                                         </div>
                                         <div className="bd-about__text">
-                                            <h4>100% Healthy Quality</h4>
+                                            <h4>Quality and Style Guaranteed</h4>
                                             <p>
-                                                The skin had ceased to feel irritated. By the same
-                                                soothing effect that blends aloe vera's calm with
-                                                honey's healing, our skincare routine reached a new
-                                                level of comfort.
+                                                Our collection is curated to offer premium fashion choices that combine comfort, quality, and the latest trends.
                                             </p>
                                         </div>
                                     </div>
@@ -314,19 +269,19 @@ function Home() {
                         <div className="col-xl-6 col-lg-6">
                             <div className="bd-about__thumb-wrapper p-relative mb-60 ">
                                 <div className="bd-about__thumb-1 w-img">
-                                    <img src="assets/img/about/about-img-1.jpg" alt="about-img"/>
+                                    <img src="assets/img/about/about-img-1.jpg" alt="about-img" />
                                 </div>
                                 <div className="bd-about__thumb-2">
-                                    <img src="assets/img/about/about-img-2.jpg" alt="about-img"/>
+                                    <img src="assets/img/about/about-img-2.jpg" alt="about-img" />
                                 </div>
                                 <div className="bd-about__quite-box">
                                     <div className="quite-content">
                                         <p>
-                                            "Organic products are very helpful to our human skin care"
+                                            "Fashion is the armor to survive the reality of everyday life."
                                         </p>
                                     </div>
                                     <div className="quite-icon">
-                                        <i className="flaticon-quote"/>
+                                        <i className="flaticon-quote" />
                                     </div>
                                     <div className="bd-about__quite-name">
                                         <span>Daniel Nirob</span>
@@ -338,9 +293,9 @@ function Home() {
                                         alt="about-shape"
                                     />
                                 </div>
-                                <div className="bd-about__shape-2"/>
-                                <div className="bd-about__shape-3"/>
-                                <div className="bd-about__shape-4"/>
+                                <div className="bd-about__shape-2" />
+                                <div className="bd-about__shape-3" />
+                                <div className="bd-about__shape-4" />
                             </div>
                         </div>
                     </div>
@@ -352,7 +307,7 @@ function Home() {
                     <div className="row align-items-center">
                         <div className="col-xl-5 col-lg-5">
                             <div className="bd-section__title-wrapper mb-60">
-                                <span className="bd-sub__title">Organic</span>
+                                <span className="bd-sub__title">Trending Now</span>
                                 <h2 className="bd-section__title mb-30">Featured Products</h2>
                             </div>
                         </div>
@@ -370,10 +325,10 @@ function Home() {
                                         {featuredProducts.length > 0 ?
                                             featuredProducts.map((object) => (
                                                 <div className="col-4">
-                                                    <Product product={object}/>
+                                                    <Product product={object} />
                                                 </div>
                                             )) : <div className="text-center">
-                                                <span style={{fontSize: "20px"}} className='badge text-danger'>No Featured Products Found</span>
+                                                <span style={{ fontSize: "20px" }} className='badge text-danger'>No Featured Products Found</span>
                                             </div>
                                         }
                                     </div>
@@ -384,15 +339,14 @@ function Home() {
                 </div>
             </section>
 
+
             <section className="bd-why-choose__area WHITE-bg-2 pt-125 pb-195">
                 <div className="container">
                     <div className="row">
                         <div className="col-12">
                             <div className="bd-section__title-wrapper text-center mb-60">
                                 <span className="bd-sub__title">Why Choose Us</span>
-                                <h2 className="bd-section__title mb-30">
-                                    6 reasons to Choose us
-                                </h2>
+                                <h2 className="bd-section__title mb-30">6 Reasons to Choose Us</h2>
                             </div>
                         </div>
                     </div>
@@ -401,106 +355,65 @@ function Home() {
                             <div className="bd-choose__wrapper choose-wrapper__left mb-60">
                                 <div className="bd-choose__item">
                                     <div className="bd-choose__content text-end">
-                                        <h4>100% Organic</h4>
-                                        <p>
-                                            Aloe vera and honey are both organic treasures, offering
-                                            natural, soothing benefits for skin care
-                                        </p>
+                                        <h4>Premium Quality</h4>
+                                        <p>Our clothing is made with high-quality fabrics for ultimate comfort and durability.</p>
                                     </div>
                                     <div className="bd-choose__icon choose-icon__left">
-                                        <img
-                                            src="assets/img/why-choose/why-choose-01.png"
-                                            alt="why-choose-img"
-                                        />
+                                        <img src="assets/img/why-choose/quality.png" alt="Premium Quality" />
                                     </div>
                                 </div>
                                 <div className="bd-choose__item">
                                     <div className="bd-choose__content text-end">
-                                        <h4>Neat &amp; Clean</h4>
-                                        <p>
-                                            Aloe vera and honey are both naturally pure, providing
-                                            clean and gentle care for your skin realization
-                                        </p>
+                                        <h4>Trendy Designs</h4>
+                                        <p>We bring you the latest fashion trends with stylish, modern, and timeless designs.</p>
                                     </div>
                                     <div className="bd-choose__icon choose-icon__left">
-                                        <img
-                                            src="assets/img/why-choose/why-choose-02.png"
-                                            alt="why-choose-img"
-                                        />
+                                        <img src="assets/img/why-choose/trendy.png" alt="Trendy Designs" />
                                     </div>
                                 </div>
                                 <div className="bd-choose__item">
                                     <div className="bd-choose__content text-end">
-                                        <h4>No Preservation</h4>
-                                        <p>
-                                            Aloe vera and honey are naturally preserved, maintaining
-                                            their purity and effectiveness without synthetic additives
-                                        </p>
+                                        <h4>Inclusive Sizing</h4>
+                                        <p>We offer a wide range of sizes, ensuring a perfect fit for everyone.</p>
                                     </div>
                                     <div className="bd-choose__icon choose-icon__left">
-                                        <img
-                                            src="assets/img/why-choose/why-choose-03.png"
-                                            alt="why-choose-img"
-                                        />
+                                        <img src="assets/img/why-choose/sizing.png" alt="Inclusive Sizing" />
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div className="col-xl-4 col-lg-4 col-md-6">
                             <div className="bd-choose__thumb text-center w-img mb-30">
-                                <img
-                                    style={{height: "400px", width: "auto", maxWidth: "100%"}}
-                                    src="img/product/alop5.jpeg"
-                                    alt="choose-big"
-                                />
+                                <img style={{ height: "400px", width: "auto", maxWidth: "100%" }} src="img/product/clothing-main.jpeg" alt="Choose Big" />
                             </div>
                         </div>
                         <div className="col-xl-4 col-lg-4 col-md-6">
                             <div className="bd-choose__wrapper choose-wrapper__right mb-60">
                                 <div className="bd-choose__item">
                                     <div className="bd-choose__icon choose__icon-right">
-                                        <img
-                                            src="assets/img/why-choose/why-choose-04.png"
-                                            alt="why-choose-img"
-                                        />
+                                        <img src="assets/img/why-choose/eco.png" alt="Eco-Friendly" />
                                     </div>
                                     <div className="bd-choose__content text-start">
-                                        <h4>Quality</h4>
-                                        <p>
-                                            We offer you the finest quality of pure aloe vera and
-                                            honey, ensuring exceptional and luxurious skin care
-                                        </p>
+                                        <h4>Sustainable Fashion</h4>
+                                        <p>Our clothes are ethically made using eco-friendly and sustainable materials.</p>
                                     </div>
                                 </div>
                                 <div className="bd-choose__item">
                                     <div className="bd-choose__icon choose__icon-right">
-                                        <img
-                                            src="assets/img/why-choose/why-choose-05.png"
-                                            alt="why-choose-img"
-                                        />
+                                        <img src="assets/img/why-choose/fast-shipping.png" alt="Fast Shipping" />
                                     </div>
                                     <div className="bd-choose__content text-start">
-                                        <h4>Trendy Design</h4>
-                                        <p>
-                                            We present you with premium aloe vera and honey in a chic,
-                                            trendy design, ensuring luxurious and effective skin care
-                                        </p>
+                                        <h4>Fast & Free Shipping</h4>
+                                        <p>Enjoy fast and free delivery on select orders for a seamless shopping experience.</p>
                                     </div>
                                 </div>
                                 <div className="bd-choose__item">
                                     <div className="bd-choose__icon choose__icon-right">
-                                        <img
-                                            src="assets/img/why-choose/why-choose-06.png"
-                                            alt="why-choose-img"
-                                        />
+                                        <img src="assets/img/why-choose/returns.png" alt="Easy Returns" />
                                     </div>
                                     <div className="bd-choose__content text-start">
-                                        <h4>Fast Delivery</h4>
-                                        <p>
-                                            We ensure fast delivery of our premium aloe vera and
-                                            honey, bringing you luxurious skin care quickly and
-                                            efficiently
-                                        </p>
+                                        <h4>Hassle-Free Returns</h4>
+                                        <p>We offer easy returns and exchanges to ensure your satisfaction.</p>
                                     </div>
                                 </div>
                             </div>
@@ -514,7 +427,7 @@ function Home() {
                     <div className="row">
                         <div className="col-12">
                             <div className="bd-section__title-wrapper text-center mb-60">
-                                <span className="bd-sub__title">Blogs Insight</span>
+                                <span className="bd-sub__title">Fashion Blogs</span>
                                 <h2 className="bd-section__title mb-30">Recent Blogs</h2>
                             </div>
                         </div>
@@ -528,40 +441,35 @@ function Home() {
                                             <Link to={{
                                                 pathname: `/blogs-details/${object.slug}`,
                                             }}
-                                                  state={{blog: object}}>
-                                                <img
-                                                    src={object.image}
-                                                    alt="news-image"
-                                                />
+                                                state={{ blog: object }}>
+                                                <img src={object.image} alt="news-image" />
                                             </Link>
                                         </div>
                                         <div className="bd-news__content">
                                             <div className="bd-news__meta-list">
                                                 <div className="bd-news__meta-item">
                                                     <Link to="news.html">
-                                                        <i className="fa-light fa-folder-open"/>
+                                                        <i className="fa-light fa-folder-open" />
                                                         {object.category}
                                                     </Link>
                                                 </div>
                                                 <div className="bd-news__meta-item">
                                                     <span>
-                                                        <i className="fa-regular fa-clock"/>
+                                                        <i className="fa-regular fa-clock" />
                                                         {object.created_at}
                                                     </span>
                                                 </div>
                                             </div>
                                             <div className="bd-news__title">
                                                 <h3>
-                                                    <Link to="/blogs-details">
-                                                        {object.title}
-                                                    </Link>
+                                                    <Link to="/blogs-details">{object.title}</Link>
                                                 </h3>
                                             </div>
                                             <Link className="bd-news__btn" to="/blogs-details">
                                                 Read More
                                                 <span>
-                                                    <i className="fa-solid fa-arrow-left"/>
-                                                    <i className="fa-solid fa-arrow-left"/>
+                                                    <i className="fa-solid fa-arrow-left" />
+                                                    <i className="fa-solid fa-arrow-left" />
                                                 </span>
                                             </Link>
                                         </div>
@@ -570,13 +478,13 @@ function Home() {
                             ))
                         ) : (
                             <div className="text-center">
-                                <span style={{fontSize: "20px"}} className='badge text-danger'>No blogs Found</span>
+                                <span style={{ fontSize: "20px" }} className='badge text-danger'>No blogs Found</span>
                             </div>
                         )}
                     </div>
-
                 </div>
             </section>
+
         </>
     );
 }

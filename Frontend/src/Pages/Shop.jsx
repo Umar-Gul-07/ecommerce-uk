@@ -139,36 +139,37 @@ const Shop = ({title}) => {
                                                                         {object.name}
                                                                     </label>
                                                                 </li>
-                                                            )) : <h1>No categories Found</h1>
+                                                            )) : <h1 style={{fontSize:"12px",color:"red"}}>No categories added yet</h1>
                                                         }
                                                     </ul>
                                                 </div>
                                             </div>
                                         </div>
                                         <div className="bd-filter__content">
-                                            <a href="product-details.html">
-                                                <div className="bd-flash___banner-item p-relative">
-                                                    <div className="bd-flash__banner-thumb w-img">
-                                                        <img
-                                                            src="assets/img/trending/flash/flash-banner-03.jpg"
-                                                            alt="flash-banner"
-                                                        />
-                                                    </div>
-                                                    <div className="bd-flash__banner-content">
-                                                        <h4>Freshly</h4>
-                                                        <h3>Maitta Potato</h3>
-                                                        <h6>
-                                                            From<span className="price">$9.00</span>
-                                                        </h6>
-                                                    </div>
-                                                    <div className="bd-flash__banner-shape">
-                                                        <div className="text">
-                                                            <span>Hot</span>Item
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        </div>
+    <a href="product-details.html">
+        <div className="bd-flash___banner-item p-relative">
+            <div className="bd-flash__banner-thumb w-img">
+                <img
+                    src="assets/img/trending/flash/flash-banner-03.jpg"
+                    alt="flash-banner"
+                />
+            </div>
+            <div className="bd-flash__banner-content">
+                <h4>Exclusive</h4>
+                <h3>Summer Collection</h3>
+                <h6>
+                    From <span className="price">$29.00</span>
+                </h6>
+            </div>
+            <div className="bd-flash__banner-shape">
+                <div className="text">
+                    <span>Hot</span> Trend
+                </div>
+            </div>
+        </div>
+    </a>
+</div>
+
 
                                     </div>
                                 </div>
