@@ -47,7 +47,7 @@ function Home() {
 
             <section className="bd-banner__area dark-bg banner-height-2 d-flex align-items-center p-relative fix">
                 <div className="bd-banner__shape-1">
-                    <img src="img/product/alo7.png" alt="banner-shape" />
+                    <img src="assets/img/banner/d4.jpeg" alt="banner-shape" />
                 </div>
                 <div className="bd-banner__discount-shape">
                     <img src="assets/img/banner/discount-shape.png" alt="discount-shape" />
@@ -61,7 +61,7 @@ function Home() {
                             <div className="col-xl-7 col-lg-6 col-md-6 col-12">
                                 <div className="bd-banner__content__wrapper p-relative">
                                     <div className="bd-banner__text-shape mb-10">
-                                        <img src="assets/img/banner/banner-shape-2.png" alt="banner-shape" />
+                                        {/* <img src="assets/img/banner/dg" alt="banner-shape" /> */}
                                     </div>
                                     <div className="bd-banner__btn-shape">
                                         <img src="assets/img/banner/curved-arrow.png" alt="curved-arrow" />
@@ -84,7 +84,7 @@ function Home() {
                             </div>
                             <div className="col-xl-5 col-lg-6 col-md-6">
                                 <div className="bd-banner__thumb">
-                                    <img src="img/product/alo1.webp" alt="banner-3.png" />
+                                    <img src="assets/img/banner/d3.png" alt="banner-3.png" />
                                 </div>
                             </div>
                         </div>
@@ -111,7 +111,7 @@ function Home() {
                                     <img src="assets/img/step/step-arrow-1.png" alt="step-arrow" />
                                 </div>
                                 <div className="bd-step__icon mb-3">
-                                    <img style={{ width: "40%", height: "auto" }} src="img/product/alol1.avif" alt="step-icon" />
+                                    <img style={{ width: "40%", height: "auto" }} src="assets/img/shop2/15.png" alt="step-icon" />
                                 </div>
                                 <div className="bd-step__content">
                                     <h3>
@@ -130,7 +130,7 @@ function Home() {
                                     <img src="assets/img/step/step-arrow-2.png" alt="step-arrow" />
                                 </div>
                                 <div className="bd-step__icon mb-3">
-                                    <img style={{ width: "40%", height: "auto" }} src="img/product/alol2.avif" alt="step-icon" />
+                                    <img style={{ width: "40%", height: "auto" }} src="assets/img/arrival/2.png" alt="step-icon" />
                                 </div>
                                 <div className="bd-step__content">
                                     <h3>
@@ -149,7 +149,7 @@ function Home() {
                                     <img src="assets/img/step/step-arrow-1.png" alt="step-arrow" />
                                 </div>
                                 <div className="bd-step__icon mb-3">
-                                    <img style={{ width: "40%", height: "auto" }} src="img/product/alol4.jpg" alt="step-icon" />
+                                    <img style={{ width: "40%", height: "auto" }} src="assets/img/arrival/5.png" alt="step-icon" />
                                 </div>
                                 <div className="bd-step__content">
                                     <h3>
@@ -165,7 +165,7 @@ function Home() {
                         <div className="col-xl-3 col-lg-3 col-md-6 col-sm-6 d-flex align-items-center">
                             <div className="bd-step__item text-center p-relative mb-60">
                                 <div className="bd-step__icon mb-3">
-                                    <img style={{ width: "40%", height: "auto" }} src="img/product/alol3.jpg" alt="step-icon" />
+                                    <img style={{ width: "40%", height: "auto" }} src="assets/img/arrival/11.png" alt="step-icon" />
                                 </div>
                                 <div className="bd-step__content">
                                     <h3>
