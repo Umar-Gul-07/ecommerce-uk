@@ -6,20 +6,25 @@ from rest_framework import generics, status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
+import json
 
 from ..core.models import ContactForm, GalleryForm
 from ..services.blogs.models import Blogs
 from ..services.product.models import Product, Category
 from .serializers import ProductSerializer, TransactionSerializer, ShippingDetailSerializer, ContactFormSerializer, \
     BlogsSerializer, CategorySerializer, GallerySerializer, StaffLoginSerializer
-from ..services.shipping.bll import get_weekly_shipping, get_monthly_shipping, get_yearly_shipping
 from ..services.shipping.models import ShippingDetail
-from ..services.transactions.bll import get_total_earnings, get_monthly_transactions, get_yearly_transactions, \
-    get_weekly_transactions, get_weekly_earnings, get_monthly_earnings
+
 from ..services.transactions.models import Transaction
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 from django.core.mail import send_mail
+from django.conf import settings
+import stripe
+from django.http import JsonResponse
+
+
+stripe.api_key = settings.STRIPE_SECRET_KEY
 
 
 class ContactFormView(generics.CreateAPIView):
@@ -121,72 +126,57 @@ def check_stock(request):
         return JsonResponse({'error': 'Product out of Stock'}, status=404)
 
 
-@require_GET
-def dashboard(request):
-    context = {
-        'total_earnings': float(get_total_earnings()),
-        'weekly_shipping': get_weekly_shipping().count(),
-        'monthly_shipping': get_monthly_shipping().count(),
-        'yearly_shipping': get_yearly_shipping().count(),
-        'weekly_transactions': get_weekly_transactions().count(),
-        'monthly_transactions': get_monthly_transactions().count(),
-        'yearly_transactions': get_yearly_transactions().count(),
-        'weekly_data': get_weekly_earnings(),
-        'monthly_data': get_monthly_earnings()
-    }
+stripe.api_key = settings.STRIPE_SECRET_KEY
 
-    print(context)
+@csrf_exempt
+def create_payment(request):
+    if request.method == "POST":
+        try:
+            data = json.loads(request.body)
+            amount = int(data.get("amount", 0) * 100)  # Convert to cents
 
-    return JsonResponse({'data': context})
+            # Create a payment intent
+            intent = stripe.PaymentIntent.create(
+                amount=amount,
+                currency='usd',  # or your currency
+                payment_method_types=["card"]
+            )
 
+            return JsonResponse({'clientSecret': intent.client_secret})
+        except Exception as e:
+            return JsonResponse({"error": str(e)}, status=400)
+        
 
-@api_view(['POST'])
-def upload_receipt(request, id):
-    """Upload receipt screenshot for the shipping request."""
-    shipping_detail = get_object_or_404(ShippingDetail, id=id)
-
+@csrf_exempt
+def save_transaction(request):
     if request.method == 'POST':
-        screenshot = request.FILES.get('receipt')
-        if screenshot:
-            shipping_detail.screenshot = screenshot
-            shipping_detail.save()
-            return JsonResponse({'message': 'Receipt uploaded successfully!'}, status=200)
-        return JsonResponse({'error': 'No screenshot provided!'}, status=400)
+        try:
+            data = json.loads(request.body)
+            email = data.get('email')  # Get user's email
 
+            transaction = Transaction.objects.create(
+                user=data.get('user', 'guest'),
+                payment_amount=data['payment_amount'],
+                transaction_id=data['transaction_id'],
+                status=data['status'],
+                stripe_payment_intent=data['transaction_id'],
+            )
 
-@api_view(['POST'])
-def accept_shipping(request, id):
-    """Accept the shipping request."""
-    shipping_detail = get_object_or_404(ShippingDetail, id=id)
-    shipping_detail.status = 'COMPLETED'
-    shipping_detail.save()
+            # Optional: Send email
+            if email:
+                subject = 'Your Order Confirmation'
+                message = f"""
+                Thank you for your purchase!
 
-    # Send email notification for acceptance
-    send_mail(
-        subject='Shipping Request Accepted',
-        message=f'Your shipping request with ID {id} has been accepted.',
-        from_email="cui1234567890987654321@gmail.com",
-        recipient_list=[shipping_detail.email],
-        fail_silently=False,
-    )
+                Transaction ID: {transaction.transaction_id}
+                Amount Paid: {transaction.payment_amount}
+                Status: {transaction.status}
 
-    return JsonResponse({'message': 'Shipping request accepted!'}, status=200)
+                We’ll send you tracking info soon.
+                """
+                send_mail(subject, message, 'no-reply@yourshop.com', [email])
 
+            return JsonResponse({'message': 'Transaction saved'}, status=200)
+        except Exception as e:
+            return JsonResponse({'error': str(e)}, status=400)
 
-@api_view(['POST'])
-def reject_shipping(request, id):
-    """Reject the shipping request."""
-    shipping_detail = get_object_or_404(ShippingDetail, id=id)
-    shipping_detail.status = 'FAILED'
-    shipping_detail.save()
-
-    # Send email notification for rejection
-    send_mail(
-        subject='Shipping Request Rejected',
-        message=f'Your shipping request with ID {id} has been rejected.',
-        from_email="cui1234567890987654321@gmail.com",
-        recipient_list=[shipping_detail.email],
-        fail_silently=False,
-    )
-
-    return JsonResponse({'message': 'Shipping request rejected!'}, status=200)

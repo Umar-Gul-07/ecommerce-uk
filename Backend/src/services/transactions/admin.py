@@ -1,18 +1,13 @@
 from django.contrib import admin
 from .models import Transaction
 
-
 @admin.register(Transaction)
 class TransactionAdmin(admin.ModelAdmin):
-    list_display = (
-        'transaction_id', 'user', 'get_products', 'payment_method', 'payment_amount', 'status', 'created_at')
-    list_filter = ('payment_method', 'status', 'created_at')
-    search_fields = ('transaction_id', 'user', 'product__name')
-    ordering = ('-created_at',)
+    list_display = ('transaction_id', 'user', 'payment_amount', 'status', 'created_at')
+    search_fields = ('transaction_id', 'user__username')
+    list_filter = ('status', 'created_at')
+    readonly_fields = ('transaction_id', 'stripe_payment_intent', 'created_at')
 
-    def get_products(self, obj):
-        """Custom method to display a list of product names."""
-        print(type(obj))  # Debugging line
-        return ", ".join([product.name for product in obj.product.all()])
-
-    get_products.short_description = 'Products'
+    def has_add_permission(self, request):
+        """Prevent adding transactions manually from the admin panel."""
+        return False

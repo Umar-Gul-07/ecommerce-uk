@@ -1,8 +1,7 @@
 from django.urls import path
 
 from .views import TransactionCreateView, TransactionListView, ShippingListView, ShippingCreateView, ContactFormView, \
-    BlogsListView, BlogsRecentPostsView, CategoriesListView, check_stock, GalleryView, dashboard, upload_receipt, \
-    accept_shipping, reject_shipping, StaffLoginView
+    BlogsListView, BlogsRecentPostsView, CategoriesListView, check_stock,save_transaction,   GalleryView, StaffLoginView,create_payment
 from ..api.views import ProductListView
 
 urlpatterns = [
@@ -21,8 +20,7 @@ urlpatterns = [
 urlpatterns += [
     path('blogs/recent-posts/', BlogsRecentPostsView.as_view(), name='blogs-recent-posts'),
     path('check-stock/', check_stock, name='check_stock'),
-    path('dashboard/', dashboard, name='dashboard'),
-    path('upload-receipt/<int:id>/', upload_receipt, name='upload-receipt'),
-    path('accept-shipping/<int:id>/', accept_shipping, name='accept-shipping'),
-    path('reject-shipping/<int:id>/', reject_shipping, name='reject-shipping'),
+    path("create-payment/", create_payment, name="create-payment"),
+    path("save-transaction/", save_transaction, name="save-transaction"),
+
 ]
