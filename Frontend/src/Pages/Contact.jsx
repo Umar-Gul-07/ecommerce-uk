@@ -99,7 +99,7 @@ const Contact = ({ title }) => {
                             required
                             onChange={(e) => setPhone(e.target.value)}
                             type="text"
-                            placeholder="Phone e.g +923029677678"
+                            placeholder="Phone e.g +44 3029677678"
                           />
                         </div>
                       </div>

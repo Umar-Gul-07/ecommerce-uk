@@ -97,17 +97,17 @@ const ProductDetails = ({title}) => {
                                                 {product.discount_active ?
                                                     <div className="bd-product__price">
                                       <span className="bd-product__old-price">
-                                        <del className='text-danger'>RS {product.price}</del>
+                                        <del className='text-danger'>€ {product.price}</del>
                                       </span>
                                                         <span
                                                             className="bd-product__new-price">
-                                        RS {product.discounted_price}
+                                        € {product.discounted_price}
                                       </span>
                                                     </div> : <div className="bd-product__price">
 
                         <span
                             className="bd-product__new-price">
-                                        RS {product.price}
+                                        € {product.price}
                                       </span>
                                                     </div>
 

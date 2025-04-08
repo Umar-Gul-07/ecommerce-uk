@@ -142,14 +142,14 @@ const CheckoutForm = ({ formData, Cart, orderTotal, dispatch, navigate }) => {
                 {Cart.map((item) => (
                   <tr key={item.name}>
                     <td>{item.name} × {item.quantity}</td>
-                    <td>RS {item.price * item.quantity}</td>
+                    <td>€ {item.price * item.quantity}</td>
                   </tr>
                 ))}
               </tbody>
               <tfoot>
                 <tr className="font-weight-bold">
                   <th>Order Total</th>
-                  <td>RS {orderTotal}</td>
+                  <td>€ {orderTotal}</td>
                 </tr>
               </tfoot>
             </table>

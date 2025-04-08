@@ -109,7 +109,7 @@ const AddToCart = ({title}) => {
                                                         </td>
                                                         <td className="product-price">
                                                         <span
-                                                            className="amount">RS {parseFloat(item.price).toFixed(2)}</span>
+                                                            className="amount">€ {parseFloat(item.price).toFixed(2)}</span>
                                                         </td>
                                                         <td className="product-quantity text-center">
                                                             <div className="product-quantity mt-10 mb-10">
@@ -140,7 +140,7 @@ const AddToCart = ({title}) => {
                                                             </div>
                                                         </td>
                                                         <td className="product-subtotal">
-                                                            <span className="amount">RS {item.total}</span>
+                                                            <span className="amount">€ {item.total}</span>
                                                         </td>
                                                         <td className="product-remove">
                                                             <Link to="#" onClick={() => handleRemoveItem(item.id)}>
@@ -158,10 +158,10 @@ const AddToCart = ({title}) => {
                                             <h2>Cart totals</h2>
                                             <ul className="mb-20">
                                                 <li>
-                                                    Subtotal <span>RS {getTotalPrice()}</span>
+                                                    Subtotal <span>€ {getTotalPrice()}</span>
                                                 </li>
                                                 <li>
-                                                    Total <span>RS {getTotalPrice()}</span>
+                                                    Total <span>€ {getTotalPrice()}</span>
                                                 </li>
                                             </ul>
                                             {Cart.length > 0 ?

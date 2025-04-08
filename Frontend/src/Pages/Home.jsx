@@ -47,59 +47,56 @@ function Home() {
 
             <section className="bd-banner__area dark-bg banner-height-2 d-flex align-items-center p-relative fix">
                 <div className="bd-banner__shape-1">
-                    <img src="assets/img/banner/d4.jpeg" alt="banner-shape" />
+                    <img src="assets/img/banner/d4.jpeg" alt="banner-shape" className="img-fluid" />
                 </div>
                 <div className="bd-banner__discount-shape">
-                    <img src="assets/img/banner/discount-shape.png" alt="discount-shape" />
+                    <img src="assets/img/banner/discount-shape.png" alt="discount-shape" className="img-fluid" />
                     <div className="discount-text">
                         <span>50%</span>off
                     </div>
                 </div>
                 <div className="container">
-                    <div className="row align-items-center">
-                        <div className="bd-singel__banner mt-70 d-flex align-items-center">
-                            <div className="col-xl-7 col-lg-6 col-md-6 col-12">
-                                <div className="bd-banner__content__wrapper p-relative">
-                                    <div className="bd-banner__text-shape mb-10">
-                                        {/* <img src="assets/img/banner/dg" alt="banner-shape" /> */}
-                                    </div>
-                                    <div className="bd-banner__btn-shape">
-                                        <img src="assets/img/banner/curved-arrow.png" alt="curved-arrow" />
-                                    </div>
-                                    <div className="bd-banner__content-2">
-                                        <h2>
-                                            Trendy & Stylish <br /> Apparel
-                                        </h2>
-                                        <p>
-                                            <b> Explore our latest fashion collection </b> <br />
-                                            <b>with premium quality and comfort</b>
-                                        </p>
-                                        <div className="bd-banner__btn">
-                                            <Link className="bd-bn__btn-1" to="/shop">
-                                                Shop Now
-                                            </Link>
-                                        </div>
+                    <div className="row align-items-center mt-5">
+                        <div className="col-xl-7 col-lg-6 col-md-12 col-sm-12 mb-4">
+                            <div className="bd-banner__content__wrapper p-relative">
+                                <div className="bd-banner__text-shape mb-10">
+                                    {/* Optional shape */}
+                                </div>
+                                <div className="bd-banner__btn-shape mb-3">
+                                    <img src="assets/img/banner/curved-arrow.png" alt="curved-arrow" className="img-fluid" />
+                                </div>
+                                <div className="bd-banner__content-2">
+                                    <h2>
+                                        Trendy & Stylish <br /> Apparel
+                                    </h2>
+                                    <p>
+                                        <b> Explore our latest fashion collection </b> <br />
+                                        <b>with premium quality and comfort</b>
+                                    </p>
+                                    <div className="bd-banner__btn mt-3">
+                                        <Link className="bd-bn__btn-1" to="/shop">
+                                            Shop Now
+                                        </Link>
                                     </div>
                                 </div>
                             </div>
-                            <div className="col-xl-5 col-lg-6 col-md-6">
-                                <div className="bd-banner__thumb">
-                                    <img src="assets/img/banner/d3.png" alt="banner-3.png" />
-                                </div>
+                        </div>
+                        <div className="col-xl-5 col-lg-6 col-md-12 col-sm-12 text-center">
+                            <div className="bd-banner__thumb">
+                                <img src="assets/img/banner/d3.png" alt="banner-3.png" className="img-fluid" />
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
 
+
             <section className="bd-step__area pt-130 pb-65">
                 <div className="container">
                     <div className="row justify-content-center">
                         <div className="col-xl-6 col-lg-7 col-md-8">
                             <div className="bd-section__title-wrapper p-relative mb-85">
-                                <div className="bd-section__img w-img">
-                                    <img src="assets/img/banner2/logo.png" alt="title-img" />
-                                </div>
+
                                 {/* <span className="bd-step__title">Trendy & Premium Quality</span> */}
                             </div>
                         </div>
@@ -246,7 +243,7 @@ function Home() {
                                 <div className="bd-about__content">
                                     <div className="bd-about__features">
                                         <div className="bd-adbout__icon">
-                                           <img src="assets/img/blog2/1.png" alt="icon" width="140" height="160" />
+                                            <img src="assets/img/blog2/1.png" alt="icon" width="140" height="160" />
 
                                         </div>
                                         <div className="bd-about__text">

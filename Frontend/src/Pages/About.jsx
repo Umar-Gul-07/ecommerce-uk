@@ -73,18 +73,16 @@ const About = ({ title }) => {
                                         <div className="bd-about__author">
                                             <div className="bd-about__author-thumb">
                                                 <img
-                                                    src="assets/img/about/about-author.png"
+                                                    src="assets/ceo.jpeg"
                                                     alt="about-author"
+                                                    width="100px"
                                                 />
                                             </div>
                                             <div className="bd-about__author-info">
-                                                <h4>Noyaviram</h4>
+                                                <h4>Ammar Iftikhar Rehman</h4>
                                                 <span>Founder &amp; CEO, Fashion E-commerce</span>
                                                 <div className="ba-author__signature">
-                                                    <img
-                                                        src="assets/img/about/author-signature.png"
-                                                        alt="author-signature"
-                                                    />
+                                                  
                                                 </div>
                                             </div>
                                         </div>

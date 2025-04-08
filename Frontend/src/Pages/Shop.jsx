@@ -158,7 +158,7 @@ const Shop = ({title}) => {
                 <h4>Exclusive</h4>
                 <h3>Summer Collection</h3>
                 <h6>
-                    From <span className="price">$29.00</span>
+                    From <span className="price"> € 29.00</span>
                 </h6>
             </div>
             <div className="bd-flash__banner-shape">
@@ -240,16 +240,7 @@ const Shop = ({title}) => {
                                                 </div>
                                             </div>
                                             <div className="bd-sort__type-filter">
-                                                <select
-                                                    className="sorting-list"
-                                                    value={sortOption}
-                                                    onChange={handleSortChange}
-                                                >
-                                                    <option value="default">Default</option>
-                                                    <option value="newly-published">Newly published</option>
-                                                    <option value="most-popular">Most popular</option>
-                                                    <option value="discounted">Discounted</option>
-                                                </select>
+                                              
                                             </div>
                                         </div>
                                     </div>
