@@ -12,6 +12,7 @@ import {
   useStripe,
   useElements,
 } from "@stripe/react-stripe-js";
+import RecommendedProductsModal from "../Recommeded";
 
 const stripePromise = loadStripe("pk_test_51OGbliKue2i3LW4Npe6oAwbcfHyFSSUdcRPKRejkqG5z1WggCgT2MnaW3ayQaPV6gnVugP7w3C5crbJyug9weV1e00CESUwd87"); // Replace with your actual Stripe public key
 
@@ -54,17 +55,27 @@ const CheckoutForm = ({ formData, Cart, orderTotal, dispatch, navigate }) => {
 
       if (paymentIntent.status === "succeeded") {
         const transactionResponse = await api.post("/save-transaction/", {
-            user: formData.email || 'guest',  // Save user email
-            payment_amount: orderTotal,
-            transaction_id: paymentIntent.id,
-            status: "COMPLETED",
-            stripe_payment_intent: paymentIntent.id,
-            email: formData.email,  // Send email explicitly
-          });
-          
+          user: formData.email || 'guest',  // Save user email
+          payment_amount: orderTotal,
+          transaction_id: paymentIntent.id,
+          status: "COMPLETED",
+          stripe_payment_intent: paymentIntent.id,
+          email: formData.email,  // Send email explicitly
+        });
+
 
         if (transactionResponse.status === 200) {
+          // After successful payment
+          const purchasedItems = Cart.map((item) => item.id);
+          purchasedItems.forEach((itemId) => {
+            dispatch({ type: "add-to-purchased", payload: itemId });
+          });
+
           toast.success("Payment Successful! Check Email");
+
+          // Show the modal for recommended products
+          dispatch({ type: "show-recommendation-modal" });
+
           dispatch({ type: "clear-cart" });
           navigate("/");
         }
@@ -142,14 +153,14 @@ const CheckoutForm = ({ formData, Cart, orderTotal, dispatch, navigate }) => {
                 {Cart.map((item) => (
                   <tr key={item.name}>
                     <td>{item.name} × {item.quantity}</td>
-                    <td>€ {item.price * item.quantity}</td>
+                    <td>£ {item.price * item.quantity}</td>
                   </tr>
                 ))}
               </tbody>
               <tfoot>
                 <tr className="font-weight-bold">
                   <th>Order Total</th>
-                  <td>€ {orderTotal}</td>
+                  <td>£ {orderTotal}</td>
                 </tr>
               </tfoot>
             </table>
@@ -216,6 +227,11 @@ const Checkout = ({ title }) => {
           </Elements>
         </div>
       </section>
+      <RecommendedProductsModal
+        handleModalClose={() => {
+          dispatch({ type: "hide-recommendation-modal" });
+        }}
+      />
     </>
   );
 };

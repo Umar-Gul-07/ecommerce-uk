@@ -1,5 +1,5 @@
-import {createContext, useReducer} from "react";
-import {ContactInfo} from "./Data";
+import { createContext, useReducer } from "react";
+import { ContactInfo } from "./Data";
 
 export const Store = createContext();
 
@@ -19,16 +19,23 @@ const initialState = {
     Cart: localStorage.getItem("CartItem")
         ? JSON.parse(localStorage.getItem("CartItem"))
         : [],
+    PurchasedProducts: localStorage.getItem("PurchasedProducts")
+        ? JSON.parse(localStorage.getItem("PurchasedProducts"))
+        : [],
+
+    showRecommendationModal: false,
+
+
 };
 
 function reducer(state, action) {
     switch (action.type) {
         case "ClearUserInfo":
-            return {...state, UserInfo: null};
+            return { ...state, UserInfo: null };
         case "Admin":
-            return {...state, Admin: action.payload};
+            return { ...state, Admin: action.payload };
         case "UserLoggedIn":
-            return {...state, UserInfo: action.payload};
+            return { ...state, UserInfo: action.payload };
 
         case "add-to-cart": {
             const item = action.payload;
@@ -43,24 +50,34 @@ function reducer(state, action) {
                         }
                         : x
                 )
-                : [...state.Cart, {...item, quantity: 1, total: item.price}];
+                : [...state.Cart, { ...item, quantity: 1, total: item.price }];
 
             localStorage.setItem("CartItem", JSON.stringify(newCart));
-            return {...state, Cart: newCart};
+            return { ...state, Cart: newCart };
         }
+        case "add-to-purchased":
+            const newPurchased = [...state.PurchasedProducts, action.payload];
+            localStorage.setItem("PurchasedProducts", JSON.stringify(newPurchased));
+            return { ...state, PurchasedProducts: newPurchased };
 
         case "update-cart":
             // Update the cart directly with the new quantity values
-            return {...state, Cart: action.payload};
+            return { ...state, Cart: action.payload };
 
         case "remove-from-cart":
             const updatedCart = state.Cart.filter((item) => item.id !== action.payload.id);
             localStorage.setItem("CartItem", JSON.stringify(updatedCart));
-            return {...state, Cart: updatedCart};
+            return { ...state, Cart: updatedCart };
 
         case "clear-cart":
             localStorage.removeItem("CartItem");  // Clear cart from localStorage
-            return {...state, Cart: []};
+            return { ...state, Cart: [] };
+
+        case "show-recommendation-modal":
+            return { ...state, showRecommendationModal: true };
+            
+        case "hide-recommendation-modal":
+            return { ...state, showRecommendationModal: false };
 
         default:
             return state;
@@ -69,6 +86,6 @@ function reducer(state, action) {
 
 export function StoreProvider(props) {
     const [state, dispatch] = useReducer(reducer, initialState);
-    const value = {state, dispatch};
+    const value = { state, dispatch };
     return <Store.Provider value={value}> {props.children} </Store.Provider>;
 }

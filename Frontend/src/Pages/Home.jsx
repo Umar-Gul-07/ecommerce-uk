@@ -1,15 +1,25 @@
 import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import api from "../Utils/Axios";
 import { toast } from "react-toastify";
 import Product from "./include/Product";
+import { Store } from "../Utils/Store";
+import RecommendedProductsModal from "./Recommeded";
+
 
 function Home() {
-    const [blogs, setBlogs] = useState([])
-    const [featuredProducts, setFeaturedProducts] = useState([])
-    const [topProducts, setTopProducts] = useState([])
+    const [blogs, setBlogs] = useState([]);
+    const [featuredProducts, setFeaturedProducts] = useState([]);
+    const [topProducts, setTopProducts] = useState([]);
+    const { state } = useContext(Store); // Getting context
+    const { PurchasedProducts,showRecommendationModal } = state; // Destructure PurchasedProducts from the context
 
+    const [recommendedProducts, setRecommendedProducts] = useState([]);
+    const [purchasedProductIds, setPurchasedProductIds] = useState([]); // Track purchased product IDs
+    const [isModalOpen, setIsModalOpen] = useState(false); // Track modal visibility
+
+    // Function to fetch products list
     const products_list = async () => {
         try {
             const result = await api.get('products-list/');
@@ -21,29 +31,80 @@ function Home() {
             const topProducts = allProducts
                 .sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
             setTopProducts(topProducts.slice(0, 4));
+
+            // Get recommended products
+            const recommended = getRecommendedProducts(purchasedProductIds, allProducts);
+            setRecommendedProducts(recommended);
         } catch (error) {
+            console.error("Error fetching products:", error);
         }
     };
 
+    // Function to fetch blogs list
     const blogs_list = async () => {
         try {
             const result = await api.get('blogs-list/');
             setBlogs(result.data.slice(0, 3));
         } catch (error) {
-
+            console.error("Error fetching blogs:", error);
         }
     };
 
+    // Function to get recommended products based on purchased product categories
+    const getRecommendedProducts = (purchasedProductIds, allProducts) => {
+        return allProducts.filter(product => 
+            purchasedProductIds.includes(product.category) && !purchasedProductIds.includes(product.id)
+        );
+    };
+    
+    // Function to handle modal close
+    const handleModalClose = () => {
+        setIsModalOpen(false);
+    
+        // Set a timeout to show the modal again after 1 minute (60,000 milliseconds)
+        setTimeout(() => {
+            setIsModalOpen(true);
+        }, 10000); // 60000 milliseconds = 1 minute
+    };
+
+    // Function to handle modal open
+    
+    const handleModalOpen = () => {
+        setIsModalOpen(true);
+    };
+
+    // Update purchased product IDs whenever PurchasedProducts changes
+    useEffect(() => {
+        // Map the PurchasedProducts to an array of IDs (assuming PurchasedProducts is an array of product objects)
+        const productIds = PurchasedProducts.map(product => product.id); 
+        setPurchasedProductIds(productIds);
+
+        if(showRecommendationModal){
+            handleModalOpen()
+        }
+        
+    }, [PurchasedProducts]); // This effect runs when PurchasedProducts changes
+
+    // Fetch products and blogs when the component mounts
     useEffect(() => {
         blogs_list();
-        products_list()
+        products_list();
     }, []);
+
 
     return (
         <>
             <Helmet>
                 <title>Home</title>
             </Helmet>
+
+            {showRecommendationModal && (
+                <RecommendedProductsModal
+                    products={recommendedProducts}
+                    handleModalClose={handleModalClose}
+                />
+            )}
+
 
             <section className="bd-banner__area dark-bg banner-height-2 d-flex align-items-center p-relative fix">
                 <div className="bd-banner__shape-1">

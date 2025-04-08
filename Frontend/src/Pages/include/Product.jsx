@@ -84,16 +84,16 @@ const Product = ({product}) => {
                     {product.discount_active ? (
                         <div className="bd-product__price">
                             <span className="bd-product__old-price">
-                                <del className="text-danger">€ {product.price}</del>
+                                <del className="text-danger">£ {product.price}</del>
                             </span>
                             <span className="bd-product__new-price">
-                                € {product.discounted_price}
+                                £ {product.discounted_price}
                             </span>
                         </div>
                     ) : (
                         <div className="bd-product__price">
                             <span className="bd-product__new-price">
-                                € {product.price}
+                                £ {product.price}
                             </span>
                         </div>
                     )}
@@ -159,17 +159,17 @@ const Product = ({product}) => {
                                                             {product.discount_active ?
                                                                 <div className="bd-product__price">
                                       <span className="bd-product__old-price">
-                                        <del className='text-danger'>€ {product.price}</del>
+                                        <del className='text-danger'>£ {product.price}</del>
                                       </span>
                                                                     <span
                                                                         className="bd-product__new-price">
-                                        € {product.discounted_price}
+                                        £ {product.discounted_price}
                                       </span>
                                                                 </div> : <div className="bd-product__price">
 
                         <span
                             className="bd-product__new-price">
-                                        € {product.price}
+                                        £ {product.price}
                                       </span>
                                                                 </div>
 

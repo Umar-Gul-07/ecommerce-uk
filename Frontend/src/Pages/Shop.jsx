@@ -1,10 +1,12 @@
-import React, {useEffect, useState} from "react";
-import {Helmet} from "react-helmet";
+import React, { useContext, useEffect, useState } from "react";
+import { Helmet } from "react-helmet";
 import api from "../Utils/Axios";
 import Product from "./include/Product";
 import ProductGrid from "./include/ProductGrid";
+import RecommendedProductsModal from "./Recommeded";
+import { Store } from "../Utils/Store";
 
-const Shop = ({title}) => {
+const Shop = ({ title }) => {
     const [allProducts, setAllProducts] = useState([]);
     const [displayedProducts, setDisplayedProducts] = useState([]);
     const [searchTerm, setSearchTerm] = useState("");
@@ -13,7 +15,12 @@ const Shop = ({title}) => {
     const [sortOption, setSortOption] = useState("default");
     const [categories, setCategories] = useState([]);
     const [selectedCategories, setSelectedCategories] = useState([]);
+    const [recommendedProducts, setRecommendedProducts] = useState([]); // State for recommended products
+    const [isModalOpen, setIsModalOpen] = useState(false); // Track modal visibility
     const productsPerPage = 8;
+
+    const { state ,dispatch} = useContext(Store); // Getting context
+    const { PurchasedProducts, showRecommendationModal } = state; // Destructure PurchasedProducts from the context
 
     const get_products = async () => {
         try {
@@ -35,6 +42,7 @@ const Shop = ({title}) => {
     };
 
     useEffect(() => {
+        dispatch({ type: "show-recommendation-modal" })
         get_products();
         get_categories();
     }, []);
@@ -46,7 +54,7 @@ const Shop = ({title}) => {
         // Apply category filtering
         if (selectedCategories.length > 0) {
             filteredProducts = filteredProducts.filter(product =>
-                selectedCategories.includes(product.category) // Adjust based on your product category structure
+                selectedCategories.includes(product.category)
             );
         }
 
@@ -60,6 +68,47 @@ const Shop = ({title}) => {
         // Apply sorting
         sortProducts(sortOption, filteredProducts);
     };
+
+    // Function to handle modal close
+    const handleModalClose = () => {
+        setIsModalOpen(false);
+    };
+
+    // Function to handle modal open
+    const handleModalOpen = () => {
+        setIsModalOpen(true);
+    };
+
+    // Function to get recommended products based on purchased product categories
+    const getRecommendedProducts = (purchasedProducts, allProducts) => {
+        if (purchasedProducts.length === 0) return []; // If no purchased products, return empty
+
+        // Get the last purchased product's category
+        const lastPurchasedProduct = purchasedProducts[purchasedProducts.length - 1];
+        const lastProduct = allProducts.find((product) => product.id === lastPurchasedProduct.id);
+
+        // If a product is found in the last purchased list
+        if (lastProduct) {
+            // Filter the recommended products to only show products from the same category
+            return allProducts.filter(
+                (product) => product.category === lastProduct.category && product.id !== lastProduct.id
+            );
+        }
+
+        return [];
+    };
+
+    // Update purchased product IDs whenever PurchasedProducts changes
+    useEffect(() => {
+        if (PurchasedProducts.length > 0) {
+            const recommended = getRecommendedProducts(PurchasedProducts, allProducts);
+            setRecommendedProducts(recommended); // Set recommended products based on the last purchased category
+        }
+
+        if (showRecommendationModal) {
+            handleModalOpen();
+        }
+    }, [PurchasedProducts, allProducts, showRecommendationModal]); // This effect runs when PurchasedProducts or allProducts changes
 
     const handleSearch = (searchValue) => {
         setSearchTerm(searchValue);
@@ -110,6 +159,13 @@ const Shop = ({title}) => {
             <Helmet>
                 <title>{title}</title>
             </Helmet>
+
+            {isModalOpen && (
+                <RecommendedProductsModal
+                    products={recommendedProducts}
+                    handleModalClose={handleModalClose}
+                />
+            )}
             <main>
                 <section className="bd-shop__area pt-110 pb-85">
                     <div className="container">
@@ -135,40 +191,40 @@ const Shop = ({title}) => {
                                                                         onChange={() => handleCategoryChange(object.name)}
                                                                     />
                                                                     <label className="check-label"
-                                                                           htmlFor={`category-${object.id}`}>
+                                                                        htmlFor={`category-${object.id}`}>
                                                                         {object.name}
                                                                     </label>
                                                                 </li>
-                                                            )) : <h1 style={{fontSize:"12px",color:"red"}}>No categories added yet</h1>
+                                                            )) : <h1 style={{ fontSize: "12px", color: "red" }}>No categories added yet</h1>
                                                         }
                                                     </ul>
                                                 </div>
                                             </div>
                                         </div>
                                         <div className="bd-filter__content">
-    <a href="product-details.html">
-        <div className="bd-flash___banner-item p-relative">
-            <div className="bd-flash__banner-thumb w-img">
-                <img
-                    src="assets/img/trending/flash/flash-banner-03.jpg"
-                    alt="flash-banner"
-                />
-            </div>
-            <div className="bd-flash__banner-content">
-                <h4>Exclusive</h4>
-                <h3>Summer Collection</h3>
-                <h6>
-                    From <span className="price"> € 29.00</span>
-                </h6>
-            </div>
-            <div className="bd-flash__banner-shape">
-                <div className="text">
-                    <span>Hot</span> Trend
-                </div>
-            </div>
-        </div>
-    </a>
-</div>
+                                            <a href="product-details.html">
+                                                <div className="bd-flash___banner-item p-relative">
+                                                    <div className="bd-flash__banner-thumb w-img">
+                                                        <img
+                                                            src="assets/img/trending/flash/flash-banner-03.jpg"
+                                                            alt="flash-banner"
+                                                        />
+                                                    </div>
+                                                    <div className="bd-flash__banner-content">
+                                                        <h4>Exclusive</h4>
+                                                        <h3>Summer Collection</h3>
+                                                        <h6>
+                                                            From <span className="price"> £ 29.00</span>
+                                                        </h6>
+                                                    </div>
+                                                    <div className="bd-flash__banner-shape">
+                                                        <div className="text">
+                                                            <span>Hot</span> Trend
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
 
 
                                     </div>
@@ -186,7 +242,7 @@ const Shop = ({title}) => {
                                                     onChange={(e) => handleSearch(e.target.value)}
                                                 />
                                                 <button type="button">
-                                                    <i className="fa-regular fa-magnifying-glass"/>
+                                                    <i className="fa-regular fa-magnifying-glass" />
                                                 </button>
                                             </form>
                                         </div>
@@ -208,11 +264,11 @@ const Shop = ({title}) => {
                                                                 aria-selected="true"
                                                             >
                                                                 <svg xmlns="http://www.w3.org/2000/svg" width="15"
-                                                                     height="15.001" viewBox="0 0 15 15.001">
+                                                                    height="15.001" viewBox="0 0 15 15.001">
                                                                     <path id="Path_12058" data-name="Path 12058"
-                                                                          d="M-1362.125-3804a.626.626,0,0,1-.625-.625v-2.5a.626.626,0,0,1,.625-.625h2.5a.625.625,0,0,1,.625.625v2.5a.625.625,0,0,1-.625.625Zm-5.624,0a.626.626,0,0,1-.626-.625v-2.5a.626.626,0,0,1,.626-.625h2.5a.625.625,0,0,1,.625.625v2.5a.625.625,0,0,1-.625.625Zm-5.625,0a.625.625,0,0,1-.625-.625v-2.5a.625.625,0,0,1,.625-.625h2.5a.625.625,0,0,1,.625.625v2.5a.625.625,0,0,1-.625.625Zm11.249-5.625a.626.626,0,0,1-.625-.625v-2.5a.626.626,0,0,1,.625-.625h2.5a.626.626,0,0,1,.625.625v2.5a.625.625,0,0,1-.625.625Zm-5.624,0a.626.626,0,0,1-.626-.625v-2.5a.626.626,0,0,1,.626-.625h2.5a.626.626,0,0,1,.625.625v2.5a.625.625,0,0,1-.625.625Zm-5.625,0a.625.625,0,0,1-.625-.625v-2.5a.626.626,0,0,1,.625-.625h2.5a.626.626,0,0,1,.625.625v2.5a.625.625,0,0,1-.625.625Zm11.249-5.625a.626.626,0,0,1-.625-.625v-2.5a.626.626,0,0,1,.625-.626h2.5a.626.626,0,0,1,.625.626v2.5a.625.625,0,0,1-.625.625Zm-5.624,0a.626.626,0,0,1-.626-.625v-2.5a.627.627,0,0,1,.626-.626h2.5a.626.626,0,0,1,.625.626v2.5a.625.625,0,0,1-.625.625Zm-5.625,0a.625.625,0,0,1-.625-.625v-2.5a.626.626,0,0,1,.625-.626h2.5a.626.626,0,0,1,.625.626v2.5a.625.625,0,0,1-.625.625Z"
-                                                                          transform="translate(1374 3819)"
-                                                                          fill="#777"></path>
+                                                                        d="M-1362.125-3804a.626.626,0,0,1-.625-.625v-2.5a.626.626,0,0,1,.625-.625h2.5a.625.625,0,0,1,.625.625v2.5a.625.625,0,0,1-.625.625Zm-5.624,0a.626.626,0,0,1-.626-.625v-2.5a.626.626,0,0,1,.626-.625h2.5a.625.625,0,0,1,.625.625v2.5a.625.625,0,0,1-.625.625Zm-5.625,0a.625.625,0,0,1-.625-.625v-2.5a.625.625,0,0,1,.625-.625h2.5a.625.625,0,0,1,.625.625v2.5a.625.625,0,0,1-.625.625Zm11.249-5.625a.626.626,0,0,1-.625-.625v-2.5a.626.626,0,0,1,.625-.625h2.5a.626.626,0,0,1,.625.625v2.5a.625.625,0,0,1-.625.625Zm-5.624,0a.626.626,0,0,1-.626-.625v-2.5a.626.626,0,0,1,.626-.625h2.5a.626.626,0,0,1,.625.625v2.5a.625.625,0,0,1-.625.625Zm-5.625,0a.625.625,0,0,1-.625-.625v-2.5a.626.626,0,0,1,.625-.625h2.5a.626.626,0,0,1,.625.625v2.5a.625.625,0,0,1-.625.625Zm11.249-5.625a.626.626,0,0,1-.625-.625v-2.5a.626.626,0,0,1,.625-.626h2.5a.626.626,0,0,1,.625.626v2.5a.625.625,0,0,1-.625.625Zm-5.624,0a.626.626,0,0,1-.626-.625v-2.5a.627.627,0,0,1,.626-.626h2.5a.626.626,0,0,1,.625.626v2.5a.625.625,0,0,1-.625.625Zm-5.625,0a.625.625,0,0,1-.625-.625v-2.5a.626.626,0,0,1,.625-.626h2.5a.626.626,0,0,1,.625.626v2.5a.625.625,0,0,1-.625.625Z"
+                                                                        transform="translate(1374 3819)"
+                                                                        fill="#777"></path>
                                                                 </svg>
                                                             </button>
                                                         </li>
@@ -228,11 +284,11 @@ const Shop = ({title}) => {
                                                                 aria-selected="false"
                                                             >
                                                                 <svg xmlns="http://www.w3.org/2000/svg" width="17.3"
-                                                                     height="15" viewBox="0 0 17.3 15">
+                                                                    height="15" viewBox="0 0 17.3 15">
                                                                     <path id="Path_12057" data-name="Path 12057"
-                                                                          d="M-2514-4232a1.5,1.5,0,0,1,1.5-1.5,1.5,1.5,0,0,1,1.5,1.5,1.5,1.5,0,0,1-1.5,1.5A1.5,1.5,0,0,1-2514-4232Zm6.179,1.328a1.236,1.236,0,0,1-1.236-1.235,1.236,1.236,0,0,1,1.236-1.236h9.885a1.235,1.235,0,0,1,1.236,1.236,1.235,1.235,0,0,1-1.236,1.235ZM-2514-4238a1.5,1.5,0,0,1,1.5-1.5,1.5,1.5,0,0,1,1.5,1.5,1.5,1.5,0,0,1-1.5,1.5A1.5,1.5,0,0,1-2514-4238Zm6.179,1.15a1.236,1.236,0,0,1-1.236-1.235,1.236,1.236,0,0,1,1.236-1.236h9.885a1.235,1.235,0,0,1,1.236,1.236,1.235,1.235,0,0,1-1.236,1.235ZM-2514-4244a1.5,1.5,0,0,1,1.5-1.5,1.5,1.5,0,0,1,1.5,1.5,1.5,1.5,0,0,1-1.5,1.5A1.5,1.5,0,0,1-2514-4244Zm6.179.971a1.236,1.236,0,0,1-1.236-1.235,1.236,1.236,0,0,1,1.236-1.236h9.885a1.235,1.235,0,0,1,1.236,1.236,1.235,1.235,0,0,1-1.236,1.235Z"
-                                                                          transform="translate(2514 4245.5)"
-                                                                          fill="#777"></path>
+                                                                        d="M-2514-4232a1.5,1.5,0,0,1,1.5-1.5,1.5,1.5,0,0,1,1.5,1.5,1.5,1.5,0,0,1-1.5,1.5A1.5,1.5,0,0,1-2514-4232Zm6.179,1.328a1.236,1.236,0,0,1-1.236-1.235,1.236,1.236,0,0,1,1.236-1.236h9.885a1.235,1.235,0,0,1,1.236,1.236,1.235,1.235,0,0,1-1.236,1.235ZM-2514-4238a1.5,1.5,0,0,1,1.5-1.5,1.5,1.5,0,0,1,1.5,1.5,1.5,1.5,0,0,1-1.5,1.5A1.5,1.5,0,0,1-2514-4238Zm6.179,1.15a1.236,1.236,0,0,1-1.236-1.235,1.236,1.236,0,0,1,1.236-1.236h9.885a1.235,1.235,0,0,1,1.236,1.236,1.235,1.235,0,0,1-1.236,1.235ZM-2514-4244a1.5,1.5,0,0,1,1.5-1.5,1.5,1.5,0,0,1,1.5,1.5,1.5,1.5,0,0,1-1.5,1.5A1.5,1.5,0,0,1-2514-4244Zm6.179.971a1.236,1.236,0,0,1-1.236-1.235,1.236,1.236,0,0,1,1.236-1.236h9.885a1.235,1.235,0,0,1,1.236,1.236,1.235,1.235,0,0,1-1.236,1.235Z"
+                                                                        transform="translate(2514 4245.5)"
+                                                                        fill="#777"></path>
                                                                 </svg>
                                                             </button>
                                                         </li>
@@ -240,7 +296,7 @@ const Shop = ({title}) => {
                                                 </div>
                                             </div>
                                             <div className="bd-sort__type-filter">
-                                              
+
                                             </div>
                                         </div>
                                     </div>
@@ -263,13 +319,13 @@ const Shop = ({title}) => {
                                                                         key={object.id}
                                                                         className="col-xxl-3 col-xl-4 col-lg-6 col-md-6 col-sm-6"
                                                                     >
-                                                                        <Product product={object}/>
+                                                                        <Product product={object} />
                                                                     </div>
                                                                 ))
                                                             ) : (
                                                                 <div className="text-center">
-                                                                    <span style={{fontSize: "20px"}}
-                                                                          className='badge text-danger'>No Products Found</span>
+                                                                    <span style={{ fontSize: "20px" }}
+                                                                        className='badge text-danger'>No Products Found</span>
                                                                 </div>
                                                             )}
                                                         </div>
@@ -285,7 +341,7 @@ const Shop = ({title}) => {
                                                         {paginatedProducts.length > 0 ? (
                                                             paginatedProducts.map((object) => (
                                                                 <div key={object.id} className="col-xxl-12 mb-20">
-                                                                    <ProductGrid product={object}/>
+                                                                    <ProductGrid product={object} />
                                                                 </div>
                                                             ))
                                                         ) : (
@@ -317,12 +373,12 @@ const Shop = ({title}) => {
                                             {/* Generate page numbers dynamically */}
                                             {[...Array(totalPages)].map((_, index) => (
                                                 <li key={index + 1}
-                                                    style={{backgroundColor: "#699c47"}}
+                                                    style={{ backgroundColor: "#699c47" }}
                                                     className={`page-item ${index + 1 === currentPage ? 'active' : ''}`}>
-                                                    <a style={{backgroundColor:"#699c47"}}
-                                                       className="page-link"
-                                                       onClick={() => handlePageChange(index + 1)}
-                                                       href="#!"
+                                                    <a style={{ backgroundColor: "#699c47" }}
+                                                        className="page-link"
+                                                        onClick={() => handlePageChange(index + 1)}
+                                                        href="#!"
                                                     >
                                                         {index + 1}
                                                     </a>
