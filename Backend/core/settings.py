@@ -51,7 +51,6 @@ INSTALLED_APPS = [
     'src.services.product',
     'src.services.transactions',
     'src.services.shipping',
-    'src.services.blogs',
 ]
 
 MIDDLEWARE = [

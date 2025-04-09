@@ -23,8 +23,6 @@ const initialState = {
         ? JSON.parse(localStorage.getItem("PurchasedProducts"))
         : [],
 
-    showRecommendationModal: false,
-
 
 };
 
@@ -55,10 +53,16 @@ function reducer(state, action) {
             localStorage.setItem("CartItem", JSON.stringify(newCart));
             return { ...state, Cart: newCart };
         }
-        case "add-to-purchased":
-            const newPurchased = [...state.PurchasedProducts, action.payload];
+        case "add-to-purchased": {
+            const exists = state.PurchasedProducts.find(p => p.id === action.payload.id);
+            const newPurchased = exists
+                ? state.PurchasedProducts
+                : [...state.PurchasedProducts, action.payload];
+        
             localStorage.setItem("PurchasedProducts", JSON.stringify(newPurchased));
             return { ...state, PurchasedProducts: newPurchased };
+        }
+        
 
         case "update-cart":
             // Update the cart directly with the new quantity values
@@ -73,11 +77,7 @@ function reducer(state, action) {
             localStorage.removeItem("CartItem");  // Clear cart from localStorage
             return { ...state, Cart: [] };
 
-        case "show-recommendation-modal":
-            return { ...state, showRecommendationModal: true };
-            
-        case "hide-recommendation-modal":
-            return { ...state, showRecommendationModal: false };
+        
 
         default:
             return state;

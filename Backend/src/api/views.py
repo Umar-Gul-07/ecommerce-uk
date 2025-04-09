@@ -9,10 +9,8 @@ from rest_framework.views import APIView
 import json
 
 from ..core.models import ContactForm, GalleryForm
-from ..services.blogs.models import Blogs
 from ..services.product.models import Product, Category
-from .serializers import ProductSerializer, TransactionSerializer, ShippingDetailSerializer, ContactFormSerializer, \
-    BlogsSerializer, CategorySerializer, GallerySerializer, StaffLoginSerializer
+from .serializers import ProductSerializer, TransactionSerializer, ShippingDetailSerializer, ContactFormSerializer, CategorySerializer, GallerySerializer, StaffLoginSerializer
 from ..services.shipping.models import ShippingDetail
 
 from ..services.transactions.models import Transaction
@@ -82,18 +80,6 @@ class ShippingCreateView(generics.CreateAPIView):
                 print(f"Failed to send email: {str(e)}")
 
         return response
-
-
-class BlogsListView(generics.ListAPIView):
-    queryset = Blogs.objects.all()
-    serializer_class = BlogsSerializer
-
-
-class BlogsRecentPostsView(APIView):
-    def get(self, request):
-        recent_posts = Blogs.objects.all().order_by('-created_at')[:3]
-        serializer = BlogsSerializer(recent_posts, many=True)
-        return Response(serializer.data)
 
 
 class GalleryView(generics.ListAPIView):

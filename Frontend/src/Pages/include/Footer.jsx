@@ -84,7 +84,7 @@ function Footer() {
                                 <ul>
                                     <li style={{ color: "#699c47" }}>
                                         <strong>
-                                            <Link to="http://localhost:8000/admin/">ROOT ADMIN</Link>
+                                            <Link to="http://localhost:8000/admin/">LOGIN</Link>
                                         </strong>
                                     </li>
                                 </ul>

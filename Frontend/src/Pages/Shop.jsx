@@ -42,7 +42,9 @@ const Shop = ({ title }) => {
     };
 
     useEffect(() => {
-        dispatch({ type: "show-recommendation-modal" })
+        if(PurchasedProducts.length>0){
+            dispatch({ type: "show-recommendation-modal" })
+        }
         get_products();
         get_categories();
     }, []);
@@ -159,13 +161,7 @@ const Shop = ({ title }) => {
             <Helmet>
                 <title>{title}</title>
             </Helmet>
-
-            {isModalOpen && (
-                <RecommendedProductsModal
-                    products={recommendedProducts}
-                    handleModalClose={handleModalClose}
-                />
-            )}
+            
             <main>
                 <section className="bd-shop__area pt-110 pb-85">
                     <div className="container">

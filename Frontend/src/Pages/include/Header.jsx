@@ -262,7 +262,7 @@ function Header() {
                                                                 <Link to="/shop">Shop</Link>
                                                             </li>
                                                             <li>
-                                                                <Link to="/blogs">Blogs</Link>
+                                                                <Link to="/recommeded-products">Recommeded Products</Link>
                                                             </li>
                                                             <li>
                                                                 <Link to="/about">About</Link>

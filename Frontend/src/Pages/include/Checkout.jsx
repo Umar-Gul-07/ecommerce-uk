@@ -66,15 +66,11 @@ const CheckoutForm = ({ formData, Cart, orderTotal, dispatch, navigate }) => {
 
         if (transactionResponse.status === 200) {
           // After successful payment
-          const purchasedItems = Cart.map((item) => item.id);
-          purchasedItems.forEach((itemId) => {
-            dispatch({ type: "add-to-purchased", payload: itemId });
+          Cart.forEach((item) => {
+            dispatch({ type: "add-to-purchased", payload: item });
           });
 
           toast.success("Payment Successful! Check Email");
-
-          // Show the modal for recommended products
-          dispatch({ type: "show-recommendation-modal" });
 
           dispatch({ type: "clear-cart" });
           navigate("/");
@@ -227,11 +223,7 @@ const Checkout = ({ title }) => {
           </Elements>
         </div>
       </section>
-      <RecommendedProductsModal
-        handleModalClose={() => {
-          dispatch({ type: "hide-recommendation-modal" });
-        }}
-      />
+     
     </>
   );
 };

@@ -13,7 +13,7 @@ function Home() {
     const [featuredProducts, setFeaturedProducts] = useState([]);
     const [topProducts, setTopProducts] = useState([]);
     const { state } = useContext(Store); // Getting context
-    const { PurchasedProducts,showRecommendationModal } = state; // Destructure PurchasedProducts from the context
+    const { PurchasedProducts, showRecommendationModal } = state; // Destructure PurchasedProducts from the context
 
     const [recommendedProducts, setRecommendedProducts] = useState([]);
     const [purchasedProductIds, setPurchasedProductIds] = useState([]); // Track purchased product IDs
@@ -52,15 +52,15 @@ function Home() {
 
     // Function to get recommended products based on purchased product categories
     const getRecommendedProducts = (purchasedProductIds, allProducts) => {
-        return allProducts.filter(product => 
+        return allProducts.filter(product =>
             purchasedProductIds.includes(product.category) && !purchasedProductIds.includes(product.id)
         );
     };
-    
+
     // Function to handle modal close
     const handleModalClose = () => {
         setIsModalOpen(false);
-    
+
         // Set a timeout to show the modal again after 1 minute (60,000 milliseconds)
         setTimeout(() => {
             setIsModalOpen(true);
@@ -68,7 +68,7 @@ function Home() {
     };
 
     // Function to handle modal open
-    
+
     const handleModalOpen = () => {
         setIsModalOpen(true);
     };
@@ -76,13 +76,13 @@ function Home() {
     // Update purchased product IDs whenever PurchasedProducts changes
     useEffect(() => {
         // Map the PurchasedProducts to an array of IDs (assuming PurchasedProducts is an array of product objects)
-        const productIds = PurchasedProducts.map(product => product.id); 
+        const productIds = PurchasedProducts.map(product => product.id);
         setPurchasedProductIds(productIds);
 
-        if(showRecommendationModal){
+        if (showRecommendationModal) {
             handleModalOpen()
         }
-        
+
     }, [PurchasedProducts]); // This effect runs when PurchasedProducts changes
 
     // Fetch products and blogs when the component mounts
@@ -97,13 +97,6 @@ function Home() {
             <Helmet>
                 <title>Home</title>
             </Helmet>
-
-            {showRecommendationModal && (
-                <RecommendedProductsModal
-                    products={recommendedProducts}
-                    handleModalClose={handleModalClose}
-                />
-            )}
 
 
             <section className="bd-banner__area dark-bg banner-height-2 d-flex align-items-center p-relative fix">
@@ -260,17 +253,15 @@ function Home() {
                                     aria-labelledby="nav-product-1-tab"
                                 >
                                     <div className="row">
-                                        <div className="col-12">
-                                            {topProducts.length > 0 ?
-                                                topProducts.map((object) => (
-                                                    <div className="col-4">
-                                                        <Product product={object} />
-                                                    </div>
-                                                )) : <div className="text-center">
-                                                    <span style={{ fontSize: "20px" }} className='badge text-danger'>No Products Found</span>
+                                        {topProducts.length > 0 ?
+                                            topProducts.map((object) => (
+                                                <div className="col-3">
+                                                    <Product product={object} />
                                                 </div>
-                                            }
-                                        </div>
+                                            )) : <div className="text-center">
+                                                <span style={{ fontSize: "20px" }} className='badge text-danger'>No Featured Products Found</span>
+                                            </div>
+                                        }
                                     </div>
                                 </div>
                             </div>
@@ -380,7 +371,7 @@ function Home() {
                                     <div className="row">
                                         {featuredProducts.length > 0 ?
                                             featuredProducts.map((object) => (
-                                                <div className="col-4">
+                                                <div className="col-3">
                                                     <Product product={object} />
                                                 </div>
                                             )) : <div className="text-center">
@@ -483,60 +474,21 @@ function Home() {
                     <div className="row">
                         <div className="col-12">
                             <div className="bd-section__title-wrapper text-center mb-60">
-                                <span className="bd-sub__title">Fashion Blogs</span>
-                                <h2 className="bd-section__title mb-30">Recent Blogs</h2>
+                                <span className="bd-sub__title">Products</span>
+                                <h2 className="bd-section__title mb-30">Recommended Products</h2>
                             </div>
                         </div>
                     </div>
                     <div className="row">
-                        {blogs.length > 0 ? (
-                            blogs.map((object) => (
-                                <div className="col-xl-4 col-lg-4 col-md-6" key={object.id}>
-                                    <div className="bd-news__item mb-40">
-                                        <div className="bd-news__thumb w-img">
-                                            <Link to={{
-                                                pathname: `/blogs-details/${object.slug}`,
-                                            }}
-                                                state={{ blog: object }}>
-                                                <img src={object.image} alt="news-image" />
-                                            </Link>
-                                        </div>
-                                        <div className="bd-news__content">
-                                            <div className="bd-news__meta-list">
-                                                <div className="bd-news__meta-item">
-                                                    <Link to="news.html">
-                                                        <i className="fa-light fa-folder-open" />
-                                                        {object.category}
-                                                    </Link>
-                                                </div>
-                                                <div className="bd-news__meta-item">
-                                                    <span>
-                                                        <i className="fa-regular fa-clock" />
-                                                        {object.created_at}
-                                                    </span>
-                                                </div>
-                                            </div>
-                                            <div className="bd-news__title">
-                                                <h3>
-                                                    <Link to="/blogs-details">{object.title}</Link>
-                                                </h3>
-                                            </div>
-                                            <Link className="bd-news__btn" to="/blogs-details">
-                                                Read More
-                                                <span>
-                                                    <i className="fa-solid fa-arrow-left" />
-                                                    <i className="fa-solid fa-arrow-left" />
-                                                </span>
-                                            </Link>
-                                        </div>
-                                    </div>
+                        {featuredProducts.length > 0 ?
+                            featuredProducts.map((object) => (
+                                <div className="col-3">
+                                    <Product product={object} />
                                 </div>
-                            ))
-                        ) : (
-                            <div className="text-center">
-                                <span style={{ fontSize: "20px" }} className='badge text-danger'>No blogs Found</span>
+                            )) : <div className="text-center">
+                                <span style={{ fontSize: "20px" }} className='badge text-danger'>No Featured Products Found</span>
                             </div>
-                        )}
+                        }
                     </div>
                 </div>
             </section>

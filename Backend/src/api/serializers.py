@@ -2,7 +2,6 @@ from django.db import models
 from rest_framework import serializers
 
 from ..core.models import ContactForm, GalleryForm
-from ..services.blogs.models import Blogs
 from ..services.product.models import Product, Category
 from ..services.shipping.models import ShippingDetail
 from ..services.transactions.models import Transaction
@@ -76,12 +75,6 @@ class ShippingDetailSerializer(serializers.ModelSerializer):
 class ContactFormSerializer(serializers.ModelSerializer):
     class Meta:
         model = ContactForm
-        fields = '__all__'
-
-
-class BlogsSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Blogs
         fields = '__all__'
 
 
