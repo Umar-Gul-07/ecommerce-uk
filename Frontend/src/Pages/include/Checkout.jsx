@@ -156,7 +156,7 @@ const CheckoutForm = ({ formData, Cart, orderTotal, dispatch, navigate }) => {
               <tfoot>
                 <tr className="font-weight-bold">
                   <th>Order Total</th>
-                  <td>£ {orderTotal}</td>
+                  <td>£ {Number(orderTotal).toFixed(2)}</td>
                 </tr>
               </tfoot>
             </table>

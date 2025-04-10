@@ -50,7 +50,7 @@ function Footer() {
                                             <Link to="/shop">Shop</Link>
                                         </li>
                                         <li>
-                                            <Link to="/blogs">Fashion Blog</Link>
+                                            <Link to="/recommeded-products">Recommeded</Link>
                                         </li>
                                         <li>
                                             <Link to="/about">Our Story</Link>
@@ -84,7 +84,7 @@ function Footer() {
                                 <ul>
                                     <li style={{ color: "#699c47" }}>
                                         <strong>
-                                            <Link to="http://localhost:8000/admin/">LOGIN</Link>
+                                            <Link to="http://localhost:8000/admin/">ROOT ADMIN</Link>
                                         </strong>
                                     </li>
                                 </ul>

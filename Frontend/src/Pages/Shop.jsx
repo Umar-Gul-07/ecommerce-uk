@@ -19,7 +19,7 @@ const Shop = ({ title }) => {
     const [isModalOpen, setIsModalOpen] = useState(false); // Track modal visibility
     const productsPerPage = 8;
 
-    const { state ,dispatch} = useContext(Store); // Getting context
+    const { state, dispatch } = useContext(Store); // Getting context
     const { PurchasedProducts, showRecommendationModal } = state; // Destructure PurchasedProducts from the context
 
     const get_products = async () => {
@@ -42,7 +42,7 @@ const Shop = ({ title }) => {
     };
 
     useEffect(() => {
-        if(PurchasedProducts.length>0){
+        if (PurchasedProducts.length > 0) {
             dispatch({ type: "show-recommendation-modal" })
         }
         get_products();
@@ -161,7 +161,7 @@ const Shop = ({ title }) => {
             <Helmet>
                 <title>{title}</title>
             </Helmet>
-            
+
             <main>
                 <section className="bd-shop__area pt-110 pb-85">
                     <div className="container">
@@ -176,6 +176,17 @@ const Shop = ({ title }) => {
                                             <div className="bd-filter__content">
                                                 <div className="bd-product__check">
                                                     <ul>
+                                                        <li >
+                                                           
+                                                            <label className="check-label btn text-white"
+                                                            style={{backgroundColor:"#699c47"}}
+                                                                htmlFor={`category-1`}
+                                                                onClick={()=>{window.location.reload()}}
+                                                                >
+                                                        
+                                                                Refresh
+                                                            </label>
+                                                        </li>
                                                         {categories.length > 0 ?
                                                             categories.map((object) => (
                                                                 <li key={object.id}>

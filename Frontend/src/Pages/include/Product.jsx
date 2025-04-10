@@ -1,12 +1,12 @@
-import React, {useContext, useState} from "react";
-import {Link} from "react-router-dom";
-import {Store} from "../../Utils/Store";
-import {toast} from "react-toastify";
+import React, { useContext, useState } from "react";
+import { Link } from "react-router-dom";
+import { Store } from "../../Utils/Store";
+import { toast } from "react-toastify";
 import api from "../../Utils/Axios";
 
-const Product = ({product}) => {
-    const {state, dispatch} = useContext(Store);
-    const {Cart} = state;
+const Product = ({ product }) => {
+    const { state, dispatch } = useContext(Store);
+    const { Cart } = state;
 
     const [showModal, setShowModal] = useState(false);
 
@@ -14,10 +14,10 @@ const Product = ({product}) => {
         setShowModal(!showModal);
     };
 
-   const addToCart = async () => {
+    const addToCart = async () => {
         try {
             const response = await api.get(`/check-stock/?product_id=${product.id}`);
-            const {in_stock, stock} = response.data;
+            const { in_stock, stock } = response.data;
             if (in_stock <= 0) {
                 toast.error("Product is out of stock");
                 return;
@@ -31,7 +31,7 @@ const Product = ({product}) => {
             }
             if (in_stock > 0) {
                 toast.success("Product Added  Cart");
-                dispatch({type: "add-to-cart", payload: product});
+                dispatch({ type: "add-to-cart", payload: product });
                 localStorage.setItem("CartItem", JSON.stringify([product]));
                 return;
             }
@@ -45,8 +45,8 @@ const Product = ({product}) => {
             <div className="bd-trending__item text-center mb-30">
                 <div className="bd-trending__product-thumb border-5">
                     <Link
-                        to={{pathname: `/product-details/${product.slug}`}}
-                        state={{product: product}}
+                        to={{ pathname: `/product-details/${product.slug}` }}
+                        state={{ product: product }}
                     >
                         <img
                             width="200"
@@ -62,7 +62,7 @@ const Product = ({product}) => {
                             title="Add to Cart"
                             onClick={addToCart} // Pass function reference here
                         >
-                            <i className="fal fa-cart-arrow-down"/>
+                            <i className="fal fa-cart-arrow-down" />
                         </Link>
                         <Link
                             to="#"
@@ -71,29 +71,31 @@ const Product = ({product}) => {
                             title="Quick Shop"
                             onClick={handleModalToggle}
                         >
-                            <i className="fal fa-eye"/>
+                            <i className="fal fa-eye" />
                         </Link>
                     </div>
                 </div>
                 <div className="bd-trending__content">
                     <h4 className="bd-product__title">
-                        <Link to="/product-details">
+                        <Link
+                            to={{ pathname: `/product-details/${product.slug}` }}
+                            state={{ product: product }}>
                             {product.name}
                         </Link>
                     </h4>
                     {product.discount_active ? (
                         <div className="bd-product__price">
                             <span className="bd-product__old-price">
-                                <del className="text-danger">£ {product.price}</del>
+                                <del className="text-danger">£ {Number(product.price).toFixed(2)}</del>
                             </span>
                             <span className="bd-product__new-price">
-                                £ {product.discounted_price}
+                                £ {Number(product.discounted_price).toFixed(2)}
                             </span>
                         </div>
                     ) : (
                         <div className="bd-product__price">
                             <span className="bd-product__new-price">
-                                £ {product.price}
+                                £ {Number(product.price).toFixed(2)}
                             </span>
                         </div>
                     )}
@@ -106,7 +108,7 @@ const Product = ({product}) => {
                     tabIndex={-1}
                     aria-modal="true"
                     role="dialog"
-                    style={{display: "block", paddingLeft: 0}}
+                    style={{ display: "block", paddingLeft: 0 }}
                 >
                     {/* modal content here */}
                     <div className="modal-dialog modal-dialog-centered">
@@ -120,7 +122,7 @@ const Product = ({product}) => {
                                         data-bs-dismiss="modal"
                                         aria-label="Close"
                                     >
-                                        <i className="fal fa-times"/>
+                                        <i className="fal fa-times" />
                                     </button>
                                     <div className="modal__inner">
                                         <div className="bd__shop-details-inner">
@@ -158,19 +160,19 @@ const Product = ({product}) => {
                                                         <div className="product-price">
                                                             {product.discount_active ?
                                                                 <div className="bd-product__price">
-                                      <span className="bd-product__old-price">
-                                        <del className='text-danger'>£ {product.price}</del>
-                                      </span>
+                                                                    <span className="bd-product__old-price">
+                                                                        <del className='text-danger'>£ {product.price}</del>
+                                                                    </span>
                                                                     <span
                                                                         className="bd-product__new-price">
-                                        £ {product.discounted_price}
-                                      </span>
+                                                                        £ {product.discounted_price}
+                                                                    </span>
                                                                 </div> : <div className="bd-product__price">
 
-                        <span
-                            className="bd-product__new-price">
-                                        £ {product.price}
-                                      </span>
+                                                                    <span
+                                                                        className="bd-product__new-price">
+                                                                        £ {product.price}
+                                                                    </span>
                                                                 </div>
 
                                                             }
@@ -195,14 +197,14 @@ const Product = ({product}) => {
                                                                 to="/shop"
                                                                 title="Add to Cart"
                                                             >
-                                                                <i className="fal fa-cart-arrow-down"/>
+                                                                <i className="fal fa-cart-arrow-down" />
                                                                 Add to Cart
                                                             </Link>
                                                         </div>
                                                         <div className="product_info-faq-area pt-50">
                                                             <nav className="product-details-tab">
                                                                 <div className="nav nav-tabs" id="nav-tab"
-                                                                     role="tablist">
+                                                                    role="tablist">
                                                                     <Link
                                                                         className="nav-item nav-link show"
                                                                         id="nav-general-tab"
